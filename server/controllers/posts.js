@@ -74,6 +74,20 @@ class Posts {
             post: post 
         });
     }
+
+    async deletePost(req, res) {
+        const post = await Post.findOne({ _id: req.params.id });
+        if (!post) return res.status(404).json({ 
+            status: 404, 
+            message: "Post not found!" 
+        });
+        await Post.deleteOne({ _id: req.params.id });
+        res.status(204).json({ 
+            status: 204, 
+            message: "deleted successfully" 
+        });
+    }
+    
 }
 
 export default new Posts();
