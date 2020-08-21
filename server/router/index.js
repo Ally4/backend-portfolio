@@ -19,5 +19,7 @@ router.get("/posts", Authentication, Posts.getPosts);
 
 router.get("/posts/:id", Authentication, Posts.getPost);
 
+router.patch("/posts/:id", Authentication, Posts.editPost);
+
 
 export default router;

@@ -46,6 +46,34 @@ class Posts {
             post: post 
         });
     }
+
+    async editPost(req, res) {
+        const { title, content, imgLink } = req.body;
+        const post = await Post.findOne({ _id: req.params.id });
+        if (!post) return res.status(404).json({ 
+            status: 404, 
+            message: "Post not found!" 
+        });
+
+        if (title) {
+            post.title = title
+        }
+
+        if (content) {
+            post.content = content;
+        }
+
+        if (imgLink) {
+            post.imageLink = imgLink
+        }
+
+        await post.save()
+        res.status(200).json({ 
+            status: 200, 
+            message: "successfully edited", 
+            post: post 
+        });
+    }
 }
 
 export default new Posts();
