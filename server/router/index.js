@@ -1,5 +1,6 @@
 import express from 'express';
 import User from "../controllers/admin";
+import Queries from "../controllers/queries";
 import Posts from "../controllers/posts";
 import Authentication from "../middleware/authenticate";
 
@@ -22,6 +23,8 @@ router.get("/posts/:id", Authentication, Posts.getPost);
 router.patch("/posts/:id", Authentication, Posts.editPost);
 
 router.delete("/posts/:id", Authentication, Posts.deletePost);
+
+router.post("/queries", Authentication, Queries.createQuery);
 
 
 export default router;
