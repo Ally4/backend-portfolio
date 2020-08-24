@@ -27,6 +27,20 @@ class Queries {
         });
     }
 
+    
+    async getQuery(req, res) {
+      const query = await Query.findOne({ _id: req.params.id });
+      if (!query) return res.status(404).json({ 
+          status: 404, 
+          message: "No query was found" 
+      });
+      res.status(200).json({ 
+          status: 200, 
+          query: query 
+      });
+  }
+
+
 }
 
 export default new Queries();

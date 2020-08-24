@@ -4,7 +4,11 @@
   "description": "My portfolio",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon -r esm ./server/app.js"
+    "start": "babel-node ./server/app.js",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/polyfill --require @babel/register ./server/tests/*.js --timeout 20000 --exit"
+  },
+  "nyc": {
+    "exclude": "./server/tests/*.js"
   },
   "repository": {
     "type": "git",
@@ -23,11 +27,26 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.0",
+    "chai-http": "^4.3.0",
+    "chai-things": "^0.2.0",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mocha": "^8.1.1",
     "mongoose": "^5.10.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.10.5",
+    "chai": "^4.2.0"
   }
 }

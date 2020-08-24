@@ -6,11 +6,7 @@ import Authentication from "../middleware/authenticate";
 
 const router = express.Router();
 
-router.get("/", function (req, res) {
-    return res.send({
-        message: 'Welcome to my personal web'
-    });
-});
+router.get("/", User.welcome);
 
 router.post("/auth/login", User.login);
 
@@ -25,6 +21,12 @@ router.patch("/posts/:id", Authentication, Posts.editPost);
 router.delete("/posts/:id", Authentication, Posts.deletePost);
 
 router.post("/queries", Authentication, Queries.createQuery);
+
+router.get("/queries", Authentication, Queries.getQueries);
+
+router.get("/queries/:id", Authentication, Queries.getQuery);
+
+router.delete("/queries/:id", Authentication, Queries.deleteQuery);
 
 
 export default router;

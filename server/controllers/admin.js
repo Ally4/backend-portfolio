@@ -7,6 +7,15 @@ import signin from "../validation/admin";
 dotenv.config();
 
 class User {
+
+    welcome (req, res) {
+      return res.status(200).json({
+          status: 200,
+          message: 'Welcome to my personal web'
+      });
+  };
+
+
     async login(req, res) {
         const { error } = signin.validate(req.body);
         if (error) {
