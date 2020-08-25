@@ -54,8 +54,8 @@ async deleteQuery(req, res) {
         status: 404, 
         message: "No query was found" });
     await Query.deleteOne({ _id: req.params.id })
-    res.status(204).json({ 
-        status: 204, 
+    res.status(200).json({ 
+        status: 200, 
         message: "The query have been deleted successfully" 
     });
 }
