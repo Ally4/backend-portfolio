@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "start": "babel-node ./server/app.js",
-    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/polyfill --require @babel/register ./server/tests/*.js --timeout 20000 --exit"
+    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/polyfill --require @babel/register ./server/tests/*.js --timeout 200000 --exit"
   },
   "nyc": {
-    "exclude": "./server/tests/*.js"
+    "exclude": "server/tests/*.js"
   },
   "repository": {
     "type": "git",
