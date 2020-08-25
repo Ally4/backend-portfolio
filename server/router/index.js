@@ -15,5 +15,7 @@ router.post("/auth/login", User.login);
 
 router.post("/posts", Authentication, Posts.createPosts);
 
+router.get("/posts", Authentication, Posts.getPosts);
+
 
 export default router;

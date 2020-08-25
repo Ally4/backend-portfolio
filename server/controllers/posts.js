@@ -26,6 +26,14 @@ class Posts {
             post: post 
         });
     }
+
+    async getPosts(_req, res) {
+        const posts = await Post.find()
+        res.status(200).json({ 
+            status: 200, 
+            posts: posts 
+        });
+    }
 }
 
 export default new Posts();
