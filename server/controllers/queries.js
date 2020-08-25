@@ -48,6 +48,17 @@ class Queries {
     });
 }
 
+async deleteQuery(req, res) {
+    const query = await Query.findOne({ _id: req.params.id });
+    if (!query) return res.status(404).json({ 
+        status: 404, 
+        message: "No query was found" });
+    await Query.deleteOne({ _id: req.params.id })
+    res.status(204).json({ 
+        status: 204, 
+        message: "The query have been deleted successfully" 
+    });
+}
 }
 
 export default new Queries();
