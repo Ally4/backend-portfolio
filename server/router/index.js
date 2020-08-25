@@ -21,5 +21,7 @@ router.get("/posts/:id", Authentication, Posts.getPost);
 
 router.patch("/posts/:id", Authentication, Posts.editPost);
 
+router.delete("/posts/:id", Authentication, Posts.deletePost);
+
 
 export default router;
