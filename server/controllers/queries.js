@@ -40,6 +40,13 @@ class Queries {
       });
   }
 
+  async getQueries(req, res) {
+    const queries = await Query.find();
+    res.status(200).json({ 
+        status: 200, 
+        queries: queries 
+    });
+}
 
 }
 
