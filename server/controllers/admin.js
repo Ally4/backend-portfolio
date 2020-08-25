@@ -35,7 +35,7 @@ class User {
             message: "There is a bad credential" 
         });
         const payload = 'admin';
-        const token = jwt.sign(payload, process.env.Key);
+        const token = jwt.sign(payload, process.env.KEY);
         return res.status(200).json({ 
             status: 200, 
             message: "successfully Login", 

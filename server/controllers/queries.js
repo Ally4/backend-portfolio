@@ -20,8 +20,8 @@ class Queries {
         });
 
         await query.save();
-        res.status(200).json({ 
-            status: 200, 
+        res.status(201).json({ 
+            status: 201, 
             message: "your query have been successfully created", 
             query: query 
         });
