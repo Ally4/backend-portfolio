@@ -34,6 +34,18 @@ class Posts {
             posts: posts 
         });
     }
+
+    async getPost(req, res) {
+        const post = await Post.findOne({ _id: req.params.id });
+        if (!post) return res.status(404).json({ 
+            status: 404, 
+            message: "Post not found!" 
+        });
+        res.status(200).json({ 
+            status: 200, 
+            post: post 
+        });
+    }
 }
 
 export default new Posts();

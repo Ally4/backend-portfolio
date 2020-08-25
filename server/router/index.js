@@ -17,5 +17,7 @@ router.post("/posts", Authentication, Posts.createPosts);
 
 router.get("/posts", Authentication, Posts.getPosts);
 
+router.get("/posts/:id", Authentication, Posts.getPost);
+
 
 export default router;
