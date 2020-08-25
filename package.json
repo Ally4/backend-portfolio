@@ -25,6 +25,13 @@
   },
   "homepage": "https://github.com/Ally4/backend-portfolio#readme",
   "dependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.10.5",
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.0",
     "chai-http": "^4.3.0",
@@ -33,6 +40,7 @@
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^8.1.1",
     "mongoose": "^5.10.0",
@@ -40,13 +48,6 @@
     "nyc": "^15.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.4",
-    "@babel/node": "^7.10.5",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/polyfill": "^7.10.4",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/register": "^7.10.5",
     "chai": "^4.2.0"
   }
 }
