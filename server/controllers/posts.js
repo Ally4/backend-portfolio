@@ -20,7 +20,7 @@ class Posts {
         });
 
         await post.save();
-        res.status(201).json({ 
+       return res.status(201).json({ 
             status: 201, 
             message: "post successfully created", 
             post: post 
@@ -41,7 +41,7 @@ class Posts {
             status: 404, 
             message: "Post not found!" 
         });
-        res.status(200).json({ 
+       return res.status(200).json({ 
             status: 200, 
             post: post 
         });
@@ -68,7 +68,7 @@ class Posts {
         }
 
         await post.save()
-        res.status(200).json({ 
+       return res.status(200).json({ 
             status: 200, 
             message: "successfully edited", 
             post: post 
@@ -82,8 +82,8 @@ class Posts {
             message: "Post not found!" 
         });
         await Post.deleteOne({ _id: req.params.id });
-        res.status(204).json({ 
-            status: 204, 
+       return res.status(200).json({ 
+            status: 200, 
             message: "deleted successfully" 
         });
     }
