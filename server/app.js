@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import swaggerUI from 'swagger-ui-express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import swagger from '../swagger.json';
 import routes from './router/index';
 
@@ -14,6 +15,8 @@ const app = express();
 app.use(express.json());
 
 app.use(bodyParser.json());
+
+app.use(cors());
 
 
 app.use(routes);
