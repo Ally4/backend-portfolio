@@ -1,0 +1,79 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "Personal web",
+        "description": "My portfolio",
+        "contact": {
+            "email": "el.ally741@gmail.com"
+        },
+        "license": {
+            "name": "ISC",
+            "url": "https://github.com/Ally4/backend-portfolio.git"
+        }
+    },
+    "host": "localhost:4000/",
+    "basePath": "/",
+    "schemes": ["HTTPS", "HTTP"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": ["Owner"],
+                "summary": "Owner login endpoint",
+                "description": "Owner can login",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "The information for the owner to login",
+                    "authorization": "string",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Owner"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successfully Login"
+                    },
+                    "400": {
+                        "description": "email is required"
+                    },
+                    "400": {
+                        "description": "password is required"
+                    },
+                    "400": {
+                        "description": "email must be a valid email"
+                    },
+                    "400": {
+                        "description": "password length must be at least 6 characters long"
+                    },
+                    "400": {
+                        "description": "There is a bad credential"
+                    },
+                    "400": {
+                        "description": "Bad request,Invalid input"
+                    }
+                }
+            }
+        }
+
+    },
+
+    "definitions": {
+        "Owner": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "required": true
+                },
+                "password": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        }
+    }
+}

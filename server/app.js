@@ -1,7 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import swaggerUI from 'swagger-ui-express';
+import dotenv from 'dotenv';
+import swagger from '../swagger.json';
 import routes from './router/index';
+
+
+dotenv.config();
 
 const app = express();
 
@@ -12,6 +18,8 @@ app.use(bodyParser.json());
 
 app.use(routes);
 
+app.use("/documentation", swaggerUI.serve, swaggerUI.setup(swagger));
+
 app.use((_req, res) => {
   res.status(404).json({ 
     status: 404, 
@@ -19,7 +27,8 @@ app.use((_req, res) => {
   });
 });
 
-const MONGODB_URI = 'mongodb+srv://Ally:Ally@portfolio.g7x1n.mongodb.net/portfolio?retryWrites=true&w=majority';
+
+const MONGODB_URI = process.env.MONGO_address;
 
 mongoose.connect(MONGODB_URI || 'mongodb://localhost:4000/portfolio', {
   useNewUrlParser: true,
