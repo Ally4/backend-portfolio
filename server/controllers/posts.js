@@ -48,7 +48,7 @@ class Posts {
     }
 
     async editPost(req, res) {
-        const { title, content, imgLink } = req.body;
+        const { title, content, imageLink } = req.body;
         const post = await Post.findOne({ _id: req.params.id });
         if (!post) return res.status(404).json({ 
             status: 404, 
@@ -63,8 +63,8 @@ class Posts {
             post.content = content;
         }
 
-        if (imgLink) {
-            post.imageLink = imgLink
+        if (imageLink) {
+            post.imageLink = imageLink
         }
 
         await post.save()

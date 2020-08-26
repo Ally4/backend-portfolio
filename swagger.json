@@ -12,7 +12,7 @@
             "url": "https://github.com/Ally4/backend-portfolio.git"
         }
     },
-    "host": "localhost:4000/",
+    "host": "allyportfolio.herokuapp.com",
     "basePath": "/",
     "schemes": ["HTTPS", "HTTP"],
     "consumes": ["application/json"],
@@ -25,7 +25,8 @@
                 "description": "Owner can login",
                 "parameters": [{
                     "in": "body",
-                    "name": "body",
+                    "name": "body",                    
+                    "operationId": "signin",
                     "description": "The information for the owner to login",
                     "authorization": "string",
                     "required": true,
@@ -38,28 +39,269 @@
                         "description": "successfully Login"
                     },
                     "400": {
-                        "description": "email is required"
-                    },
-                    "400": {
-                        "description": "password is required"
-                    },
-                    "400": {
-                        "description": "email must be a valid email"
-                    },
-                    "400": {
-                        "description": "password length must be at least 6 characters long"
-                    },
-                    "400": {
-                        "description": "There is a bad credential"
-                    },
-                    "400": {
-                        "description": "Bad request,Invalid input"
+                        "description": "Invalid requests and inputs"
                     }
                 }
             }
-        }
+        },
 
+        "/posts": {
+            "post": {
+                "tags": ["Create the posts"],
+                "summary": "Post",
+                "description": "Post a blog",
+                "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "description": "Owner`s Token",                    
+                    "operationId": "post-blog"
+                },
+                {
+                    "in": "body",
+                    "name": "body",
+                    "description": "The owner creating a blog",
+                    "type": "object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/post"
+                    }
+                }
+            ],
+                "responses": {
+                    "201": {
+                        "description": "post successfully created"
+                    },
+                    "401": {
+                        "description": "Check your header and put in the token"
+                    },
+                    "403": {
+                        "description": "The token inserted is not right"
+                    },
+                    "400": {
+                        "description": "Invalid requests or inputs"
+                    }
+                }
+            },
+
+            "get": {
+                "tags": ["Post"],
+                "summary": "Get",
+                "description": "Get all posts",                    
+                "operationId": "get-posts",
+                "responses": {
+                    "200": {
+                        "description": "Posts found"
+                    },
+                    "400": {
+                        "description": "Posts not found"
+                    }
+                }
+        }
+     },
+
+
+     "/posts/{id}": {
+        "get": {
+            "tags": ["Post"],
+            "summary": "Get",
+            "description": "Get a post by id",
+            "operationId": "post by id",
+            "parameters": [{
+                "in": "path",
+                "name": "id",
+                "required": true
+            }],
+            "responses": {
+                "200": {
+                    "description": "Post found"
+                },
+                "404": {
+                    "description": "Post not found"
+                }
+            }
+        },
+
+        "patch": {
+            "tags": ["Post"],
+            "summary": "Update",
+            "description": "Update a post by id",
+            "operationId": "update post by id",
+            "parameters": [{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "description": "Admin Token"
+            },
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            },
+            {
+                "in": "body",
+                "name": "body",
+                "description": "Admin object that needed to edit a specific blog Post",
+                "type": "object",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/post"
+                }
+            }
+        ],
+            "responses": {
+                "200": {
+                    "description": "Edited successfully"
+                },
+                "404": {
+                    "description": "Post not found"
+                }
+            }
+        },
+
+        "delete": {
+            "tags": ["Post"],
+            "summary": "Owner delete a post",
+            "description": "delete a post",
+            "operationId": "delete post",
+            "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "description": "Owner`s Token"
+                },
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "blog post deleted successfully"
+                }
+            }
+            }
     },
+
+
+
+    "/queries": {
+        "post": {
+            "tags": ["Query"],
+            "summary": "Post",
+            "description": "Post a query",
+            "operationId": "post a query",
+            "parameters": [
+            {
+                "in": "body",
+                "name": "body",
+                "description": "A user create a query",
+                "type": "object",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/query"
+                }
+            }
+        ],
+            "responses": {
+                "201": {
+                    "description": "Your query have been successfully created"
+                },
+                "400": {
+                    "description": "Invalid requests or inputs"
+                }
+            }
+        },
+
+
+    "get": {
+        "tags": ["Queries"],
+        "summary": "Get",
+        "description": "Get all queries",                    
+        "operationId": "get-queries",
+        "parameters": [{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "description": "Owner`s Token"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Queries found"
+            },
+            "400": {
+                "description": "Queries not found"
+            }
+        }
+}
+},
+
+
+"/queries/{id}": {
+    "get": {
+        "tags": ["Query"],
+        "summary": "Get",
+        "description": "Get a query by id",
+        "operationId": "query by id",
+        "parameters": [{
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Owner`s Token"
+        },
+        {
+            "in": "path",
+            "name": "id",
+            "required": true
+        }
+    ],
+        "responses": {
+            "200": {
+                "description": "Query found"
+            },
+            "404": {
+                "description": "Query not found"
+            }
+        }
+    },
+
+    "delete": {
+        "tags": ["Query"],
+        "summary": "Owner delete a query",
+        "description": "delete a query",
+        "operationId": "delete query",
+        "parameters": [{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "description": "Owner`s Token"
+            },
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "query deleted successfully"
+            }
+        }
+        }
+    }
+
+},
+
+
+
 
     "definitions": {
         "Owner": {
@@ -70,6 +312,42 @@
                     "required": true
                 },
                 "password": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+
+        "post": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "required": true
+                },
+                "content": {
+                    "type": "string",
+                    "required": true
+                },
+                "imageLink": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+
+        "query": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "email": {
+                    "type": "string",
+                    "required": true
+                },
+                "query": {
                     "type": "string",
                     "required": true
                 }
