@@ -31,42 +31,14 @@ before((done) => {
 
 
 describe('Testing the queries', () => {
-  it('user should not be able to  post queries with no token ', (done) => {
-    reader()
-      .post('/queries')
-      .send(queries[2])
-      .end((error, res) => {
-        expect(res).to.have.status(401);
-        expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(401);
-        expect(res.body).to.have.property('message');
-        expect(res.body.message).to.be.a('string');
-        done(error);
-      });
-    });
-  it('user should not be able to post queries with a bad token ', (done) => {
-    reader()
-      .post('/queries')
-      .set('Authorization', queries[0])
-      .send(queries[2])
-      .end((error, res) => {
-        expect(res).to.have.status(403);
-        expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(403);
-        expect(res.body).to.have.property('message');
-        expect(res.body.message).to.be.a('string');
-        done(error);
-      });
-    });
   it('user should not be able to post queries with no data', (done) => {
     reader()
       .post('/queries')
-      .set('Authorization', queries[4])
       .send(queries[0])
       .end((error, res) => {
-        expect(res).to.have.status(403);
+        expect(res).to.have.status(400);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(403);
+        expect(res.body.status).to.be.equal(400);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);

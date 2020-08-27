@@ -12,6 +12,30 @@ const reader = () => chai.request(app);
 
 
 describe('Testing the user', () => {
+  it('user should be able to get to the welcome page', (done) => {
+    reader()
+      .get('/')
+      .end((error, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(200);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+        done(error);
+      });
+  });
+  it('user  not be able to get to the required response with wrong params', (done) => {
+    reader()
+      .post('/')
+      .end((error, res) => {
+        expect(res).to.have.status(404);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(404);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+        done(error);
+      });
+  });
   it('user should be able to signin', (done) => {
     reader()
       .post('/auth/login')
