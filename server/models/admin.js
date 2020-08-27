@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const portfolio = mongoose.model('portfolios', new mongoose.Schema({
+const portfolio = mongoose.model('portfolio', new mongoose.Schema({
     id: mongoose.Schema.ObjectId,
     email: String,
     password: String
