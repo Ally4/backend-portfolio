@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import swaggerUI from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import createOwner from '../server/seeds/seed';
 import swagger from '../swagger.json';
 import routes from './router/index';
 
@@ -37,6 +38,8 @@ mongoose.connect(MONGODB_URI || 'mongodb://localhost:4000/portfolio', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+createOwner();
 
 mongoose.connection.on('connected', () => console.log('Mongoose is on!.'));
 
