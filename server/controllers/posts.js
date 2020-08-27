@@ -55,17 +55,11 @@ class Posts {
             message: "Post not found!" 
         });
 
-        if (title) {
-            post.title = title
-        }
+        if (title) { post.title = title }
 
-        if (content) {
-            post.content = content;
-        }
+        if (content) { post.content = content }
 
-        if (imageLink) {
-            post.imageLink = imageLink
-        }
+        if (imageLink) { post.imageLink = imageLink }
 
         await post.save()
        return res.status(200).json({ 
