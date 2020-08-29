@@ -330,6 +330,30 @@
                 }
             }
         }
+    },
+
+    "/posts/like/{id}": {
+        "post": {
+            "tags": ["Like"],
+            "summary": "Post",
+            "description": "Like a post",
+            "operationId": "like a post by id",
+            "parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            }
+        ],
+            "responses": {
+                "200": {
+                    "description": "The comment posted successfully"
+                },
+                "404": {
+                    "description": "Post was not found"
+                }
+            }
+        }
     }
 
 },

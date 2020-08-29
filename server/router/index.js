@@ -22,6 +22,8 @@ router.delete("/posts/:id", Authentication, Posts.deletePost);
 
 router.post("/posts/comment/:id", Posts.insertComment);
 
+router.post("/posts/like/:id", Posts.likePost);
+
 router.post("/queries", Queries.createQuery);
 
 router.get("/queries", Authentication, Queries.getQueries);

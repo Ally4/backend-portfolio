@@ -51,6 +51,20 @@ class Posts {
         });
     }
 
+    async likePost(req, res) {
+        const post = await Post.findOne({ _id: req.params.id });
+        if (!post) {
+            return res.status(404).json({ 
+                status: 404, 
+                error: "The post is not found" 
+            })
+        };
+        await Post.updateOne({ _id: req.params.id }, { $inc: { likes: 1 } });
+        return res.status(200).json({ 
+            status: 200, 
+            message: "You liked the post" 
+        });
+    }
 
     async getPosts(_req, res) {
         const posts = await Post.find()
