@@ -25,9 +25,9 @@ app.use(routes);
 app.use("/documentation", swaggerUI.serve, swaggerUI.setup(swagger));
 
 app.use((_req, res) => {
-  res.status(404).json({ 
-    status: 404, 
-    message: 'Page doesn\'t exists' 
+  res.status(405).json({ 
+    status: 405, 
+    message: 'The you are sending is not right' 
   });
 });
 

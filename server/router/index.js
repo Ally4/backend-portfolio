@@ -20,6 +20,8 @@ router.patch("/posts/:id", Authentication, Posts.editPost);
 
 router.delete("/posts/:id", Authentication, Posts.deletePost);
 
+router.post("/posts/comment/:id", Posts.insertComment);
+
 router.post("/queries", Queries.createQuery);
 
 router.get("/queries", Authentication, Queries.getQueries);
