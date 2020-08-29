@@ -11,7 +11,13 @@ const schema = mongoose.Schema({
         required: true
     },
     imageLink: {
-        type: String,
+        type: String
+    },
+    comments: {
+        type: Array
+    },
+    likes: {
+        type: Number
     }
 });
 

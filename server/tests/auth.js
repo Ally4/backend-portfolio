@@ -28,9 +28,9 @@ describe('Testing the user', () => {
     reader()
       .post('/')
       .end((error, res) => {
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(405);
         expect(res.body).to.have.property('status');
-        expect(res.body.status).to.be.equal(404);
+        expect(res.body.status).to.be.equal(405);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);

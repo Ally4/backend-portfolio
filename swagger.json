@@ -118,7 +118,7 @@
                     "description": "Post found"
                 },
                 "404": {
-                    "description": "Post not found"
+                    "description": "Post was not found"
                 }
             }
         },
@@ -156,7 +156,7 @@
                     "description": "Edited successfully"
                 },
                 "404": {
-                    "description": "Post not found"
+                    "description": "Post was not found"
                 }
             }
         },
@@ -296,6 +296,40 @@
             }
         }
         }
+    },
+
+    "/posts/comment/{id}": {
+        "post": {
+            "tags": ["Comment"],
+            "summary": "Post",
+            "description": "Post a comment",
+            "operationId": "comment on post id",
+            "parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            },
+            {
+            "in": "body",
+            "name": "body",
+            "description": "A owner comment the post",
+            "type": "array",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/comment"
+            }
+        }
+        ],
+            "responses": {
+                "200": {
+                    "description": "The comment posted successfully"
+                },
+                "404": {
+                    "description": "Post was not found"
+                }
+            }
+        }
     }
 
 },
@@ -330,6 +364,20 @@
                     "required": true
                 },
                 "imageLink": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+
+        "comment": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "comment": {
                     "type": "string",
                     "required": true
                 }
