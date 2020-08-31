@@ -39,7 +39,7 @@
                         "description": "successfully Login"
                     },
                     "400": {
-                        "description": "Invalid requests and inputs"
+                        "description": "Invalid/missing/uncorrect request(s)/input(s)!."
                     }
                 }
             }
@@ -80,7 +80,7 @@
                         "description": "The token inserted is not right"
                     },
                     "400": {
-                        "description": "Invalid requests or inputs"
+                        "description": "Invalid/missing/uncorrect request(s)/input(s)!."
                     }
                 }
             },
@@ -96,6 +96,9 @@
                     },
                     "400": {
                         "description": "Posts not found"
+                    },
+                    "405": {
+                        "description": "The request you are sending is not right"
                     }
                 }
         }
@@ -119,6 +122,9 @@
                 },
                 "404": {
                     "description": "Post was not found"
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
                 }
             }
         },
@@ -151,14 +157,23 @@
                 }
             }
         ],
-            "responses": {
-                "200": {
-                    "description": "Edited successfully"
-                },
-                "404": {
-                    "description": "Post was not found"
-                }
+        "responses": {
+            "201": {
+                "description": "post successfully created"
+            },
+            "401": {
+                "description": "Check your header and put in the token"
+            },
+            "403": {
+                "description": "The token inserted is not right"
+            },
+            "400": {
+                "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+            },
+            "405": {
+                "description": "The request you are sending is not right"
             }
+        }
         },
 
         "delete": {
@@ -181,7 +196,19 @@
             ],
             "responses": {
                 "200": {
-                    "description": "blog post deleted successfully"
+                    "description": "Post was deleted successfully"
+                },
+                "401": {
+                    "description": "Check your header and put in the token"
+                },
+                "403": {
+                    "description": "The token inserted is not right"
+                },
+                "404": {
+                    "description": "Post is not found"
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
                 }
             }
             }
@@ -212,7 +239,10 @@
                     "description": "Your query have been successfully created"
                 },
                 "400": {
-                    "description": "Invalid requests or inputs"
+                    "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
                 }
             }
         },
@@ -235,8 +265,17 @@
             "200": {
                 "description": "Queries found"
             },
-            "400": {
+            "401": {
+                "description": "Check your header and put in the token"
+            },
+            "403": {
+                "description": "The token inserted is not right"
+            },
+            "404": {
                 "description": "Queries not found"
+            },
+            "405": {
+                "description": "The request you are sending is not right"
             }
         }
 }
@@ -262,14 +301,23 @@
             "required": true
         }
     ],
-        "responses": {
-            "200": {
-                "description": "Query found"
-            },
-            "404": {
-                "description": "Query not found"
-            }
+    "responses": {
+        "200": {
+            "description": "Query found"
+        },
+        "401": {
+            "description": "Check your header and put in the token"
+        },
+        "403": {
+            "description": "The token inserted is not right"
+        },
+        "404": {
+            "description": "Query not found"
+        },
+        "405": {
+            "description": "The request you are sending is not right"
         }
+    }
     },
 
     "delete": {
@@ -292,7 +340,19 @@
         ],
         "responses": {
             "200": {
-                "description": "query deleted successfully"
+                "description": "Query successfully deleted"
+            },
+            "401": {
+                "description": "Check your header and put in the token"
+            },
+            "403": {
+                "description": "The token inserted is not right"
+            },
+            "400": {
+                "description": "Query not found"
+            },
+            "405": {
+                "description": "The request you are sending is not right"
             }
         }
         }
@@ -321,12 +381,45 @@
             }
         }
         ],
+        "responses": {
+            "200": {
+                "description": "comment successfully posted"
+            },
+            "400": {
+                "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+            },
+            "404": {
+                "description": "Post not found"
+            },
+            "405": {
+                "description": "The request you are sending is not right"
+            }
+        }
+        }
+    },
+
+    "/posts/like/{id}": {
+        "post": {
+            "tags": ["Like"],
+            "summary": "Post",
+            "description": "Like a post",
+            "operationId": "like a post by id",
+            "parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            }
+        ],
             "responses": {
                 "200": {
                     "description": "The comment posted successfully"
                 },
                 "404": {
                     "description": "Post was not found"
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
                 }
             }
         }
