@@ -12,15 +12,17 @@ router.post("/auth/login", User.login);
 
 router.post("/posts", Authentication, Posts.createPosts);
 
-router.get("/posts", Authentication, Posts.getPosts);
+router.get("/posts", Posts.getPosts);
 
-router.get("/posts/:id", Authentication, Posts.getPost);
+router.get("/posts/:id", Posts.getPost);
 
 router.patch("/posts/:id", Authentication, Posts.editPost);
 
 router.delete("/posts/:id", Authentication, Posts.deletePost);
 
-router.post("/queries", Authentication, Queries.createQuery);
+router.post("/posts/comment/:id", Posts.insertComment);
+
+router.post("/queries", Queries.createQuery);
 
 router.get("/queries", Authentication, Queries.getQueries);
 

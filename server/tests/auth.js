@@ -24,6 +24,18 @@ describe('Testing the user', () => {
         done(error);
       });
   });
+  it('user  not be able to get to the required response with wrong params', (done) => {
+    reader()
+      .post('/')
+      .end((error, res) => {
+        expect(res).to.have.status(405);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(405);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+        done(error);
+      });
+  });
   it('user should be able to signin', (done) => {
     reader()
       .post('/auth/login')
