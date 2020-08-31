@@ -1,6 +1,6 @@
 ## Badges
 
-[![Build Status](https://travis-ci.org/Ally4/backend-portfolio.svg?branch=develop)](https://travis-ci.org/Ally4/backend-portfolio) , [![Coverage Status](https://coveralls.io/repos/github/Ally4/backend-portfolio/badge.svg?branch=develop)](https://coveralls.io/github/Ally4/backend-portfolio?branch=develop) , [![Maintainability](https://api.codeclimate.com/v1/badges/0a49fb5bf99b028aeaf7/maintainability)](https://codeclimate.com/github/Ally4/backend-portfolio/maintainability) , [![Test Coverage](https://api.codeclimate.com/v1/badges/0a49fb5bf99b028aeaf7/test_coverage)](https://codeclimate.com/github/Ally4/backend-portfolio/test_coverage)
+[![Build Status](https://travis-ci.org/Ally4/backend-portfolio.svg?branch=develop)](https://travis-ci.org/Ally4/backend-portfolio) , [![Coverage Status](https://coveralls.io/repos/github/Ally4/backend-portfolio/badge.svg)](https://coveralls.io/github/Ally4/backend-portfolio) , [![Maintainability](https://api.codeclimate.com/v1/badges/0a49fb5bf99b028aeaf7/maintainability)](https://codeclimate.com/github/Ally4/backend-portfolio/maintainability) , [![Test Coverage](https://api.codeclimate.com/v1/badges/0a49fb5bf99b028aeaf7/test_coverage)](https://codeclimate.com/github/Ally4/backend-portfolio/test_coverage)
 
 ## Features
 
@@ -13,6 +13,8 @@
 - The owner is the only one to get the query by id
 - The owner is the only one to delete the query by id
 - All normal users can get all the blog post
+- All normal users can comment a blog post
+- All normal users can like a blog post
 - All normal users can get a blog post by id
 - All normal users can sent a query
 
@@ -50,6 +52,8 @@
 | POST   | /queries                         |  200 OK  | EVERYONE                | Creating a query                  |
 | POST   | /auth/login                      |  200 OK  | OWNER                   | Signin of the owner               |
 | POST   | /posts                           |  201 OK  | OWNER                   | Creating a blog post              |
+| POST   | /posts/comment/:id               |  200 OK  | EVERYONE                | Comment a blog post               |
+| POST   | /posts/like/:id                  |  200 OK  | EVERYONE                | Like a blog post                  |
 | PATCH  | /posts/:id                       |  200 OK  | OWNER                   | Editing a blog post by id         |
 | DELETE | /posts/:id                       |  200 OK  | OWNER                   | Deleting a blog post by id        |
 | DELETE | /queries/:id                     |  200 OK  | OWNER                   | Deleting a query by id            |
@@ -102,4 +106,3 @@ npm test
 
 
 #### Made with :heart: by Ally
-
