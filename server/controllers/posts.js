@@ -42,7 +42,8 @@ class Posts {
         const post = await Post.findOne({ _id: req.params.id });
         if (!post){ 
             return res.status(404).json({ 
-                status: 404, error: "The post is not found" 
+                status: 404, 
+                message: "The post is not found" 
             })};
         await Post.updateOne({ _id: req.params.id }, { $push: { comments: { name: name, comment: comment } } });
         return res.status(200).json({ 
@@ -51,6 +52,17 @@ class Posts {
         });
     }
 
+    async like(req, res) {
+        const post = await Post.findOne({ _id: req.params.id });
+        if (!post) return res.status(404).json({ 
+            status: 404, 
+            message: "Post not found!" });
+        await Post.updateOne({ _id: req.params.id }, { $inc: { likes: 1 } });
+        return res.status(200).json({ 
+            status: 200, 
+            message: "The post was liked successfully" 
+        });
+    }
 
     async getPosts(_req, res) {
         const posts = await Post.find()
