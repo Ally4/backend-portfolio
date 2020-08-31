@@ -12,6 +12,18 @@ const reader = () => chai.request(app);
 
 
 describe('Testing the user', () => {
+  it('user should be able to get a welcome message', (done) => {
+    reader()
+      .get('/')
+      .end((error, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(200);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+        done(error);
+      });
+  });
   it('user should be able to signin', (done) => {
     reader()
       .post('/auth/login')
@@ -72,6 +84,18 @@ describe('Testing the user', () => {
         expect(res).to.have.status(400);
         expect(res.body).to.have.property('status');
         expect(res.body.status).to.be.equal(400);
+        expect(res.body).to.have.property('message');
+        expect(res.body.message).to.be.a('string');
+        done(error);
+      });
+  });
+  it('user should not be able to signin if the password is wrong', (done) => {
+    reader()
+      .get('/auth/login')
+      .end((error, res) => {
+        expect(res).to.have.status(405);
+        expect(res.body).to.have.property('status');
+        expect(res.body.status).to.be.equal(405);
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.be.a('string');
         done(error);

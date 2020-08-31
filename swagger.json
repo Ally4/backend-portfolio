@@ -1,0 +1,498 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "Personal web",
+        "description": "My portfolio",
+        "contact": {
+            "email": "el.ally741@gmail.com"
+        },
+        "license": {
+            "name": "ISC",
+            "url": "https://github.com/Ally4/backend-portfolio.git"
+        }
+    },
+    "host": "allyportfolio.herokuapp.com",
+    "basePath": "/",
+    "schemes": ["HTTPS", "HTTP"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": ["Owner"],
+                "summary": "Owner login endpoint",
+                "description": "Owner can login",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",                    
+                    "operationId": "signin",
+                    "description": "The information for the owner to login",
+                    "authorization": "string",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Owner"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successfully Login"
+                    },
+                    "400": {
+                        "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+                    }
+                }
+            }
+        },
+
+        "/posts": {
+            "post": {
+                "tags": ["Create the posts"],
+                "summary": "Post",
+                "description": "Post a blog",
+                "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "description": "Owner`s Token",                    
+                    "operationId": "post-blog"
+                },
+                {
+                    "in": "body",
+                    "name": "body",
+                    "description": "The owner creating a blog",
+                    "type": "object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/post"
+                    }
+                }
+            ],
+                "responses": {
+                    "201": {
+                        "description": "post successfully created"
+                    },
+                    "401": {
+                        "description": "Check your header and put in the token"
+                    },
+                    "403": {
+                        "description": "The token inserted is not right"
+                    },
+                    "400": {
+                        "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+                    }
+                }
+            },
+
+            "get": {
+                "tags": ["Post"],
+                "summary": "Get",
+                "description": "Get all posts",                    
+                "operationId": "get-posts",
+                "responses": {
+                    "200": {
+                        "description": "Posts found"
+                    },
+                    "400": {
+                        "description": "Posts not found"
+                    },
+                    "405": {
+                        "description": "The request you are sending is not right"
+                    }
+                }
+        }
+     },
+
+
+     "/posts/{id}": {
+        "get": {
+            "tags": ["Post"],
+            "summary": "Get",
+            "description": "Get a post by id",
+            "operationId": "post by id",
+            "parameters": [{
+                "in": "path",
+                "name": "id",
+                "required": true
+            }],
+            "responses": {
+                "200": {
+                    "description": "Post found"
+                },
+                "404": {
+                    "description": "Post was not found"
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
+                }
+            }
+        },
+
+        "patch": {
+            "tags": ["Post"],
+            "summary": "Update",
+            "description": "Update a post by id",
+            "operationId": "update post by id",
+            "parameters": [{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "description": "Admin Token"
+            },
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            },
+            {
+                "in": "body",
+                "name": "body",
+                "description": "Admin object that needed to edit a specific blog Post",
+                "type": "object",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/post"
+                }
+            }
+        ],
+        "responses": {
+            "201": {
+                "description": "post successfully created"
+            },
+            "401": {
+                "description": "Check your header and put in the token"
+            },
+            "403": {
+                "description": "The token inserted is not right"
+            },
+            "400": {
+                "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+            },
+            "405": {
+                "description": "The request you are sending is not right"
+            }
+        }
+        },
+
+        "delete": {
+            "tags": ["Post"],
+            "summary": "Owner delete a post",
+            "description": "delete a post",
+            "operationId": "delete post",
+            "parameters": [{
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "type": "string",
+                    "description": "Owner`s Token"
+                },
+                {
+                    "in": "path",
+                    "name": "id",
+                    "required": true
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Post was deleted successfully"
+                },
+                "401": {
+                    "description": "Check your header and put in the token"
+                },
+                "403": {
+                    "description": "The token inserted is not right"
+                },
+                "404": {
+                    "description": "Post is not found"
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
+                }
+            }
+            }
+    },
+
+
+
+    "/queries": {
+        "post": {
+            "tags": ["Query"],
+            "summary": "Post",
+            "description": "Post a query",
+            "operationId": "post a query",
+            "parameters": [
+            {
+                "in": "body",
+                "name": "body",
+                "description": "A user create a query",
+                "type": "object",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/query"
+                }
+            }
+        ],
+            "responses": {
+                "201": {
+                    "description": "Your query have been successfully created"
+                },
+                "400": {
+                    "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
+                }
+            }
+        },
+
+
+    "get": {
+        "tags": ["Queries"],
+        "summary": "Get",
+        "description": "Get all queries",                    
+        "operationId": "get-queries",
+        "parameters": [{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "description": "Owner`s Token"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Queries found"
+            },
+            "401": {
+                "description": "Check your header and put in the token"
+            },
+            "403": {
+                "description": "The token inserted is not right"
+            },
+            "404": {
+                "description": "Queries not found"
+            },
+            "405": {
+                "description": "The request you are sending is not right"
+            }
+        }
+}
+},
+
+
+"/queries/{id}": {
+    "get": {
+        "tags": ["Query"],
+        "summary": "Get",
+        "description": "Get a query by id",
+        "operationId": "query by id",
+        "parameters": [{
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Owner`s Token"
+        },
+        {
+            "in": "path",
+            "name": "id",
+            "required": true
+        }
+    ],
+    "responses": {
+        "200": {
+            "description": "Query found"
+        },
+        "401": {
+            "description": "Check your header and put in the token"
+        },
+        "403": {
+            "description": "The token inserted is not right"
+        },
+        "404": {
+            "description": "Query not found"
+        },
+        "405": {
+            "description": "The request you are sending is not right"
+        }
+    }
+    },
+
+    "delete": {
+        "tags": ["Query"],
+        "summary": "Owner delete a query",
+        "description": "delete a query",
+        "operationId": "delete query",
+        "parameters": [{
+                "name": "Authorization",
+                "in": "header",
+                "required": true,
+                "type": "string",
+                "description": "Owner`s Token"
+            },
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Query successfully deleted"
+            },
+            "401": {
+                "description": "Check your header and put in the token"
+            },
+            "403": {
+                "description": "The token inserted is not right"
+            },
+            "400": {
+                "description": "Query not found"
+            },
+            "405": {
+                "description": "The request you are sending is not right"
+            }
+        }
+        }
+    },
+
+    "/posts/comment/{id}": {
+        "post": {
+            "tags": ["Comment"],
+            "summary": "Post",
+            "description": "Post a comment",
+            "operationId": "comment on post id",
+            "parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            },
+            {
+            "in": "body",
+            "name": "body",
+            "description": "A owner comment the post",
+            "type": "array",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/comment"
+            }
+        }
+        ],
+        "responses": {
+            "200": {
+                "description": "comment successfully posted"
+            },
+            "400": {
+                "description": "Invalid/missing/uncorrect request(s)/input(s)!."
+            },
+            "404": {
+                "description": "Post not found"
+            },
+            "405": {
+                "description": "The request you are sending is not right"
+            }
+        }
+        }
+    },
+
+    "/posts/like/{id}": {
+        "post": {
+            "tags": ["Like"],
+            "summary": "Post",
+            "description": "Like a post",
+            "operationId": "like a post by id",
+            "parameters": [
+            {
+                "in": "path",
+                "name": "id",
+                "required": true
+            }
+        ],
+            "responses": {
+                "200": {
+                    "description": "The comment posted successfully"
+                },
+                "404": {
+                    "description": "Post was not found"
+                },
+                "405": {
+                    "description": "The request you are sending is not right"
+                }
+            }
+        }
+    }
+
+},
+
+
+
+
+    "definitions": {
+        "Owner": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "required": true
+                },
+                "password": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+
+        "post": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "required": true
+                },
+                "content": {
+                    "type": "string",
+                    "required": true
+                },
+                "imageLink": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+
+        "comment": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "comment": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+
+        "query": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "email": {
+                    "type": "string",
+                    "required": true
+                },
+                "query": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        }
+    }
+}

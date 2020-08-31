@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 app.use(routes);
 
 app.use((_req, res) => {
-  res.status(404).json({ 
-    status: 404, 
-    message: 'Page doesn\'t exists' 
+  res.status(405).json({ 
+    status: 405, 
+    message: 'The request you are sending is not right' 
   });
 });
 
